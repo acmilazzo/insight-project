@@ -1,0 +1,17 @@
+<html>
+ <head>
+    <title>{{title}} - material picker</title>
+ </head>
+ <body>
+    <h1>Material Picker</h1>
+       <h2>Material Name</h2>
+       <form action="/return_page" method="GET">
+           <input type="text" name="name">
+           <input type="submit" name="my-form" value="Send">
+       </form>
+	   <div id="content">
+	   		<p> Similar materials to {{name}} are {% for val in return_val%}
+				{{val}} , {% endfor %}</p>
+	   	</div>
+ </body>
+</html>
