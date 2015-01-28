@@ -1,8 +1,13 @@
 <html>
  <head>
-    <title>{{title}} - microblog</title>
+    <title>{{title}} - material picker</title>
  </head>
  <body>
-    <h1>Hello, {{user.nickname}}!</h1>
+    <h1>Material Picker</h1>
+       <h2>Material Name</h2>
+       <form action="/return_page" method="GET">
+           <input type="text" name="name">
+           <input type="submit" name="my-form" value="Send">
+       </form>
  </body>
 </html>
