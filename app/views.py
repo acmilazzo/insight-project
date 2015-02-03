@@ -21,7 +21,7 @@ def return_page():
     #return_val = {'id1':'somevalue'}
     with db:
         cur= db.cursor()
-        cur.execute( "SELECT CASE WHEN a1.material1 = '%s' then a1.material2 else a1.material1 END AS material, a1.value FROM analysis_results a1 join analysis_results a2 on a1.material1 = a2.material1 and a1.material2 = a2.material2 and a2.type = 'num_feat_sprse' WHERE '%s' in (a1.material1,a1.material2) and a1.type='n_euclid_sprse' and a2.value > 2 ORDER by a1.value asc limit 5" % (name, name))
+        cur.execute( "SELECT CASE WHEN a1.material1 = '%s' then a1.material2 else a1.material1 END AS material, a1.value FROM analysis_results a1 join analysis_results a2 on a1.material1 = a2.material1 and a1.material2 = a2.material2 and a2.type = 'num_feat_sprse' WHERE '%s' in (a1.material1,a1.material2) and a1.type='n_euclid_sprse' and a2.value > 3 ORDER by a1.value asc limit 5" % (name, name))
         query_results = cur.fetchall()
         return_val = []
         for result in query_results:
