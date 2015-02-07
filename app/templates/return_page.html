@@ -38,17 +38,28 @@
 			   <tr><td>
 				<div style=width:100px;height:100px;border-radius:50px;font-size:20px;color:#fff;line-height:100px;text-align:center;background:#000>{{name}}</div>
 			</td>
-			<td> &nbsp; Similar Materials </td>
+			 {% if return_val is defined %}
+				<td> &nbsp; Similar Materials </td>
+			{% else %}
+				<td> &nbsp; No available results for similar materials. 
+					<br></br>
+					&nbsp; Please try a different material.
+				
+				</td>
+			{% endif %}
 		</tr>
 			</table>
 			<p></p>
-			<table class="table table-hover">
-			   <tr><th>Material</th><th>Euclidean Distance</th></tr>
-			   {% for val in return_val %}
-			   <tr><td><a href="/return_page?name={{val['material']}}&my-form=Send">{{ val['material'] }}</a></td><td> {{ val['n_euclid_sprse'] }}</td></tr>
-			   {% endfor %}
-				  
+			 {% if return_val is defined %}
+				<table class="table table-hover">
+			   	 <tr><th>Material</th><th>Euclidean Distance</th><th>Cosine Similarity</th></tr>
+			   	{% for val in return_val %}
+			   	<tr><td><a href="/return_page?name={{val['material']}}&my-form=Send">{{ val['material'] }}</a></td><td> {{ val['n_euclid_sprse'] }}</td>
+				<td> {{ val['cosine'] }}</td></tr>
+			   	{% endfor %}
 			   </table>
+			{% endif %}
+			  
 			   <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 			   <script src="static/js/bootstrap.min.js"></script>
 	   	</div>
