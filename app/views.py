@@ -25,13 +25,16 @@ def return_page():
     
     with db:
         cur= db.cursor()
-        cur.execute( """SELECT CASE WHEN material1 = '%s'
+        cur.execute( """SELECT CASE WHEN LOWER(material1) = LOWER('%s')
                             THEN material2 ELSE material1 END
-                            AS material, cosine, n_euclid, ktau
+                            AS material, cosine, n_euclid, ktau,
+                            CASE WHEN LOWER(material1) = LOWER('%s')
+                            THEN material1 ELSE material2 END as orig_material
                             FROM analysis
-                            WHERE '%s' in (material1,material2)
+                            WHERE LOWER('%s') 
+                              in (LOWER(material1),LOWER(material2))
                               and num_feat > 3
-                            ORDER BY n_euclid asc limit 5""" %(name, name))
+                            ORDER BY n_euclid asc limit 5""" %(name, name, name))
         
         query_results = cur.fetchall()
         return_val = []
@@ -39,6 +42,7 @@ def return_page():
             sprse_val = round( result[2], 3 )
             cosine_val = round( result[1], 3 )
             corr_val = round( result[3], 3 )
+            name = result[4]
             return_val.append(dict(material=result[0], 
                               n_euclid_sprse=sprse_val, 
                               cosine=cosine_val, correlation=corr_val))
