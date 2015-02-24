@@ -14,11 +14,11 @@ def read_data_w_index( filename ):
 
     
 def normalize_input( input_dataframe ):
-    df_zscore = (input_dataframe - input_dataframe.mean())
-                              /input_dataframe.std(ddof=0)
+    df_zscore = ((input_dataframe - input_dataframe.mean())
+                /input_dataframe.std(ddof=0))
     feature_num_dict = {}
     index_vals = list(df_zscore.index.values)
-    for rownum in xrange(1,(len(df_zscore.index))):
+    for rownum in range(1,(len(df_zscore.index))):
         num_features = len( df_zscore.ix[rownum].dropna() )
         if num_features in feature_num_dict:
             feature_num_dict[num_features].append(index_vals[rownum])
@@ -57,10 +57,10 @@ def extract_similarities_orig( input_dataframe, output_filename, subset_vals = 0
                                                         result_list[0], 
                                                         result_list[1])
                     names = list(newdf.index)
-                    cvs_line = names[0] + ',' + names[1] 
-                               + ',' + str(cosine_result[0][0]) + 
+                    cvs_line = (names[0] + ',' + names[1] + 
+                               ',' + str(cosine_result[0][0]) + 
                                ',' + str(euclidean_result) + 
-                               ',' + str(col_len)
+                               ',' + str(col_len))
                     out_obj.write( cvs_line + '\n')
     return
 
